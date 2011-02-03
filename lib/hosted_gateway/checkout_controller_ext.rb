@@ -2,21 +2,29 @@ module HostedGateway
   module CheckoutControllerExt
     def self.included(base)
       self.class_eval do
+        skip_before_filter :load_data, :only => [:process_gateway_return]
+        skip_before_filter :load_amount, :only => [:process_gateway_return]
+
+        #We need to skip this security check Rails does in order to let the payment gateway do a postback.
+        skip_before_filter :verify_authenticity_token, :only => [:process_gateway_return]
+
+
         #TODO? This method is more or less copied from the normal controller - so this sort
         #of this is prone to messing up updates - maybe we could use alias_method_chain or something?
-        
+
         def process_gateway_return
-          gateway = PaymentMethod.find_by_id_and_type(params[:payment_method_id], "ExternalGateway")
+          gateway = PaymentMethod.find_by_id_and_type(ExternalGateway.parse_custom_data(params)["payment_method_id"], "ExternalGateway")
           @order, payment_made = gateway.process_response(params)
 
           if @order && payment_made
             #Payment successfully processed
-            checkout = @order.checkout
-            checkout.payments.clear
-            payment = checkout.payments.create
+            @order.payments.clear
+            payment = @order.payments.create
+            payment.started_processing
             payment.amount = params[:amount] || @order.total
             payment.payment_method = gateway
-            checkout.save
+            payment.complete
+            @order.save
 
             if @order.next
               state_callback(:after)

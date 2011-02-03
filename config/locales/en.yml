@@ -1,5 +1,14 @@
 en:
+    status_param_key: Transaction Status Field
+    successful_transaction_value: Successful transaction value
     external_gateway:
+        admin:
+            view:
+                details: Payment Details
+                amount: Amount Paid
+                payment_status: Transaction Status
+                paid_at: Paid at
+
         checkout:
             button_text: Proceed to Payment
             redirect_notice: "You are about to proceed to our payment gateway - once you have successfully made payment, you will be returned to the checkout to complete your order."

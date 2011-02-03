@@ -1,0 +1,24 @@
+<fieldset>
+  <legend><%= payment.payment_method.name %></legend>
+
+  <table class="index">
+    <tr>
+      <th colspan="6"><%= t('external_gateway.admin.view.details') %></th>
+    </tr>
+    <tr>
+      <td><label><%= t("external_gateway.admin.view.amount") %>:</label></td>
+      <td>
+        <%= number_to_currency(payment.amount) %>
+      </td>
+      <td><label><%= t("external_gateway.admin.view.payment_status") %>:</label></td>
+      <td>
+        <%= payment.state %>
+      </td>
+      <td><label><%= t("external_gateway.admin.view.paid_at") %>:</label></td>
+      <td>
+        <%= payment.updated_at.strftime("%c") %>
+      </td>
+    </tr>
+  </table>
+</fieldset>
+
