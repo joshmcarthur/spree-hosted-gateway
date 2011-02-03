@@ -16,9 +16,14 @@
       $('form').append("<%= escape_javascript(hidden_field_tag(attr.name.to_sym, attr.value.to_s)) %>");
     <% end -%>
 
+    <% #Reenable the submit button and give it a new value that is more indicative of what will happen %>
     $('form input[type=submit], form button[type=submit]').removeAttr('disabled');
     $('form button[type=submit] span').text("<%= I18n.translate('external_gateway.checkout.button_text') %>");
   });
 <% end -%>
 <% end -%>
+
+<div class="external_gateway redirect_notice">
+  <%= I18n.translate('external_gateway.checkout.redirect_notice') %>
+</div>
 

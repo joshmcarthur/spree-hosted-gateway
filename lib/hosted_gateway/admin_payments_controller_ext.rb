@@ -2,6 +2,10 @@ module HostedGateway
   module AdminPaymentsControllerExt
     def self.included(base)
       base.class_eval do
+        
+        #TODO? This method is more or less copied from the normal controller - so this sort
+        #of this is prone to messing up updates - maybe we could use alias_method_chain or something?
+        
         def process_gateway_return
           gateway = PaymentMethod.find_by_id_and_type(params[:payment_method_id], "ExternalGateway")
           @order, payment_made = gateway.process_response(params)
@@ -27,7 +31,7 @@ module HostedGateway
             end
           elsif @order.nil?
             #Order not passed through correctly
-            flash[:error] = I18n.t(:order_missing)
+            flash[:error] = I18n.t('external_gateway.gateway_response.admin_order_missing')
             redirect_to new_object_path
           else
             #Error processing payment

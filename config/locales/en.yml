@@ -1,3 +1,9 @@
 en:
-    order_missing: "We could not find this order. Please contact us using the information on our homepage."
+    external_gateway:
+        checkout:
+            button_text: Proceed to Payment
+            redirect_notice: "You are about to proceed to our payment gateway - once you have successfully made payment, you will be returned to the checkout to complete your order."
+        gateway_response:
+            order_missing: "We could not find this order. Please contact us using the information on our homepage."
+            admin_order_missing: "The order could not be found, it looks like some information was not passed back by the payment gateway."
 
