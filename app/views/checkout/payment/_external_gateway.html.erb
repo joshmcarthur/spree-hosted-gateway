@@ -1,0 +1,7 @@
+<form action="<%=payment_method.request_url %>" method="post">
+  <% payment_method.request_form_fields(@order).each do |tag| %>
+    <%= tag %>
+  <% end %>
+  <%= submit_tag %>
+</form>
+

@@ -1,0 +1,24 @@
+<% content_for :head do  -%>
+<%= javascript_tag do -%>
+  jQuery(document).ready(function()
+  {
+    <% #First, disable all the existing form inputs -%>
+    $('form :input').attr('disabled', true);
+    <% #Next, change where the form is pointing to -%>
+    $('form').attr('action', '<%= escape_javascript(payment_method.get_server) %>');
+    $('form').attr('method', 'post');
+
+    <% #Finally, add the new inputs to the form to submit what we need. -%>
+    $('form').append("<%= escape_javascript(hidden_field_tag(:return_url, payment_method.get_return_url_for(@order, session[:order_token], true))) %>");
+    $('form').append("<%= escape_javascript(hidden_field_tag(:amount, payment_method.get_amount_for(@order))) %>");
+    <% debugger %>
+    <% payment_method.additional_attributes.each do |attr| %>
+      $('form').append("<%= escape_javascript(hidden_field_tag(attr.name.to_sym, attr.value.to_s)) %>");
+    <% end -%>
+
+    $('form input[type=submit], form button[type=submit]').removeAttr('disabled');
+    $('form button[type=submit] span').text("Pay Now");
+  });
+<% end -%>
+<% end -%>
+
