@@ -1,9 +1,8 @@
 module HostedGateway
   module CheckoutControllerExt
     def self.included(base)
-      self.class_eval do
-        skip_before_filter :load_data, :only => [:process_gateway_return]
-        skip_before_filter :load_amount, :only => [:process_gateway_return]
+      base.class_eval do
+        skip_before_filter :load_order, :only => [:process_gateway_return]
 
         #We need to skip this security check Rails does in order to let the payment gateway do a postback.
         skip_before_filter :verify_authenticity_token, :only => [:process_gateway_return]
