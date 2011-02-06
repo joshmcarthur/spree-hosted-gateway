@@ -9,7 +9,7 @@
     $('form').attr('method', 'post');
 
     <% #Finally, add the new inputs to the form to submit what we need. -%>
-    $('form').append("<%= escape_javascript(hidden_field_tag(:return_url, payment_method.get_return_url_for(@order, true))) %>");
+    $('form').append("<%= escape_javascript(hidden_field_tag(:return_url, payment_method.get_return_url_for(@order, false))) %>");
     $('form').append("<%= escape_javascript(hidden_field_tag(:custom_data, payment_method.get_custom_data_for(@order))) %>");
     $('form').append("<%= escape_javascript(hidden_field_tag(:amount, payment_method.get_total_for(@order))) %>");
 
@@ -18,7 +18,7 @@
     <% end -%>
 
     $('form input[type=submit], form button[type=submit]').removeAttr('disabled');
-    $('form button[type=submit] span').text("<%= I18n.translate('external_gateway.checkout.button_text') %>");
+    $('form input[type=submit]').val("<%= I18n.translate('external_gateway.checkout.button_text') %>");
   });
 <% end -%>
 <% end -%>
