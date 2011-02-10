@@ -1,0 +1,18 @@
+.external_gateway.redirect_notice
+{
+background-color: #EFEFEF;
+font-size: 1.2em;
+width: 80%;
+padding: 5%;
+border: 1px solid #CCC;
+color: #222;
+}
+
+.external_gateway.redirect_notice img
+{
+    float: left;
+    margin-right: 10px;
+}
+
+div#checkout #payment-methods li { width: auto; }
+
