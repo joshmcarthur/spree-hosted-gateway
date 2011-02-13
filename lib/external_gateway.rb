@@ -98,7 +98,7 @@ class ExternalGateway < PaymentMethod
   #This method allows users to add preferences using class_eval, which should automatically be picked up
   #by this method and inserted into relevant forms as hidden fields.
   def additional_attributes
-    self.preferences.select { |key| !INTERNAL_PREFERENCES.include?(key.to_sym) }
+    self.preferences.select { |key| !INTERNAL_PREFERENCES.include?(key[0].to_sym) }
   end
 
 end
