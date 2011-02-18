@@ -11,7 +11,7 @@ Installation
 ============
 
 Really, like any Spree 0.30+ extension - add the following to your Gemfile, and run `bundle install`
-`gem 'hosted_gateway', :git => 'https://www.github.com/3months/spree-hosted-gateway.git'`
+`gem 'hosted_gateway', :git => 'https://www.github.com/joshmcarthur/spree-hosted-gateway.git'`
 
 There aren't any migrations or public assets, so there is no need to run `rake hosted_gateway:install` (Though you can if you _really_ want.
 
