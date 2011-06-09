@@ -1,27 +1,27 @@
 <% content_for :head do  -%>
-<%= stylesheet_link_tag 'payment' -%>
-<%= javascript_tag do -%>
-  jQuery(document).ready(function()
-  {
-    <% #First, disable all the existing form inputs -%>
-    $('form :input').attr('disabled', true);
-    <% #Next, change where the form is pointing to -%>
-    $('form').attr('action', '<%= escape_javascript(payment_method.get_server) %>');
-    $('form').attr('method', 'post');
+  <%= stylesheet_link_tag 'payment' -%>
+  <%= javascript_tag do -%>
+    jQuery(document).ready(function()
+    {
+      <% #First, disable all the existing form inputs -%>
+      <% # remove erb tags and hash to uncomment -> $('form :input').attr('disabled', false); %>
+      <% #Next, change where the form is pointing to -%>
+      $('form[id=checkout_form_payment]').attr('action', '<%= escape_javascript(payment_method.get_server) %>');
+      $('form').attr('method', 'post');
 
-    <% #Finally, add the new inputs to the form to submit what we need. -%>
-    $('form').append("<%= escape_javascript(hidden_field_tag(:return_url, payment_method.get_return_url_for(@order, false))) %>");
-    $('form').append("<%= escape_javascript(hidden_field_tag(:custom_data, payment_method.get_custom_data_for(@order))) %>");
-    $('form').append("<%= escape_javascript(hidden_field_tag(:amount, payment_method.get_total_for(@order))) %>");
+      <% #Finally, add the new inputs to the form to submit what we need. -%>
+      $('form').append("<%= escape_javascript(hidden_field_tag(:return_url, payment_method.get_return_url_for(@order, false))) %>");
+      $('form').append("<%= escape_javascript(hidden_field_tag(:custom_data, payment_method.get_custom_data_for(@order))) %>");
+      $('form').append("<%= escape_javascript(hidden_field_tag(:amount, payment_method.get_total_for(@order))) %>");
 
-    <% payment_method.additional_attributes.each do |key, value| %>
-      $('form').append("<%= escape_javascript(hidden_field_tag(key.to_sym, value.to_s)) %>");
-    <% end -%>
+      <% payment_method.additional_attributes.each do |key, value| %>
+        $('form').append("<%= escape_javascript(hidden_field_tag(key.to_sym, value.to_s)) %>");
+      <% end -%>
 
-    $('form input[type=submit], form button[type=submit]').removeAttr('disabled');
-    $('form input[type=submit]').val("<%= I18n.translate('external_gateway.checkout.button_text') %>");
-  });
-<% end -%>
+      <% # remove erb tags and hash to uncomment -> $('form input[type=submit], form button[type=submit]').removeAttr('disabled'); %>
+      $('form input[class=continue button primary]').val("<%= I18n.translate('external_gateway.checkout.button_text') %>");
+    });
+  <% end -%>
 <% end -%>
 
 
