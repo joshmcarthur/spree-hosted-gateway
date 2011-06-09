@@ -75,7 +75,7 @@ class ExternalGateway < PaymentMethod
 
   #The payment gateway I'm using only accepts rounded-dollar amounts. Stupid.
   #I've added this method nonetheless, so that I can easily override it to round the amount
-  def get_total_for_(order)
+  def get_total_for(order)
     return order.total
   end
 
