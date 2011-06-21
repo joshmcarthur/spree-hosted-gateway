@@ -1,5 +1,5 @@
 <% content_for :head do  -%>
-  <%= stylesheet_link_tag 'payment' -%>
+  <%= stylesheet_link_tag 'store/hosted_gateway/payment' -%>
   <%= javascript_tag do -%>
     jQuery(document).ready(function()
     {
@@ -26,7 +26,7 @@
 
 
 <div class="external_gateway redirect_notice">
-  <%= image_tag 'proceed.png', :size => '48x48' -%>
+  <%= image_tag 'store/hosted_gateway/proceed.png', :size => '48x48' -%>
   <%= I18n.translate('external_gateway.checkout.redirect_notice') %>
 </div>
 
