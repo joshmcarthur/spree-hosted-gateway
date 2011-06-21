@@ -13,7 +13,7 @@ Installation
 Really, like any Spree 0.30+ extension - add the following to your Gemfile, and run `bundle install`
 `gem 'hosted_gateway', :git => 'https://www.github.com/joshmcarthur/spree-hosted-gateway.git'`
 
-There aren't any migrations or public assets, so there is no need to run `rake hosted_gateway:install` (Though you can if you _really_ want.
+This extension has recently been upgraded to support Rails 3.1's asset pipeline - to add the assets required (A stylesheet, and an image), you can simply run `rails generate hosted_gateway:install`. Please report any issues you have with this part of the setup, as my knowledge of the asset pipeline and generation process is not reliable as yet. If you just want to get off the ground, run `bundle open hosted_gateway` to open the gem in a file browser, and copy the assets from `app/assets` into your project.
 
 
 Configuration
